@@ -1,0 +1,56 @@
+
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ANDIO — Home</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <nav class="topbar">
+    <div class="brand">ANDIO</div>
+    <div class="navlinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="editor.html">Editor</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="settings.html">Settings</a>
+    </div>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <h2>Text → Bild (Lokal)</h2>
+      <textarea id="prompt" placeholder="Beschreibe das gewünschte Bild..."></textarea>
+      <div class="row">
+        <label><input type="checkbox" id="nsfw" checked> NSFW erlauben</label>
+        <button id="btnGen">Generieren</button>
+      </div>
+      <div id="genStatus" class="status">Bereit</div>
+      <div id="genResult" class="result"></div>
+    </section>
+    <section class="card">
+      <h3>Status</h3>
+      <pre id="statusBox"></pre>
+    </section>
+  </main>
+  <script type="module" src="../assets/js/api.js"></script>
+  <script type="module">
+    import {apiGet, apiPost} from "../assets/js/api.js";
+    async function refreshStatus(){
+      const s = await apiGet("/api/status");
+      document.getElementById("statusBox").textContent = JSON.stringify(s, null, 2);
+    }
+    document.getElementById("btnGen").addEventListener("click", async ()=>{
+      const prompt = document.getElementById("prompt").value.trim();
+      if(!prompt){ alert("Bitte Prompt eingeben."); return; }
+      document.getElementById("genStatus").textContent = "Generiere...";
+      const res = await apiPost("/api/images/generate", {prompt});
+      if(res.error){ document.getElementById("genStatus").textContent = "Fehler: "+res.error; return; }
+      document.getElementById("genStatus").textContent = "Fertig.";
+      document.getElementById("genResult").innerHTML = `<img src="/outputs/${res.file}" alt="gen">`;
+      refreshStatus();
+    });
+    refreshStatus();
+  </script>
+</body>
+</html>

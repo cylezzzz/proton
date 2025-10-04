@@ -1,0 +1,48 @@
+
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ANDIO — Editor</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <nav class="topbar">
+    <div class="brand">ANDIO</div>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="editor.html" class="active">Editor</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="settings.html">Settings</a>
+    </div>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <h2>Bild-Editor</h2>
+      <div class="row">
+        <input type="file" id="file" accept="image/*">
+        <button id="btnApply">Anwenden & Speichern</button>
+      </div>
+      <div class="tools">
+        <label><input type="checkbox" id="grayscale"> Graustufen</label>
+        <label>Blur <input type="range" id="blur" min="0" max="10" step="0.5" value="0"></label>
+        <label>Rotate <input type="number" id="rotate" value="0" step="1"></label>
+        <label><input type="checkbox" id="flip_h"> Flip H</label>
+        <label><input type="checkbox" id="flip_v"> Flip V</label>
+        <label>Pixelate <input type="number" id="pixelate" min="0" max="40" value="0"></label>
+        <div class="row">
+          <input type="text" id="textVal" placeholder="Text...">
+          <input type="number" id="textSize" value="28" style="width:80px">
+          <input type="color" id="textColor" value="#ffffff">
+        </div>
+      </div>
+      <div class="canvasWrap">
+        <canvas id="canvas"></canvas>
+      </div>
+      <div class="hint">Tipp: Du kannst die Auswahl mit gedrückter Maus ziehen, um einen Crop-Rahmen zu setzen.</div>
+    </section>
+  </main>
+  <script type="module" src="../assets/js/editor.js"></script>
+</body>
+</html>

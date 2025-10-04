@@ -1,0 +1,39 @@
+
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ANDIO — Settings</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <nav class="topbar">
+    <div class="brand">ANDIO</div>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="editor.html">Editor</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="settings.html" class="active">Settings</a>
+    </div>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <h2>Einstellungen</h2>
+      <label><input type="checkbox" id="nsfw"> NSFW erlauben</label>
+      <label>Provider-Reihenfolge <input id="provider" value="LOCAL"></label>
+      <label>Output-Verzeichnis <input id="outdir" value=""></label>
+      <label>Thumbnail-Größe <input type="number" id="thumb" value="320"></label>
+      <div class="row">
+        <button id="save">Speichern</button>
+        <span id="saveStatus" class="status"></span>
+      </div>
+    </section>
+    <section class="card">
+      <h3>Server-Status</h3>
+      <pre id="statusBox"></pre>
+    </section>
+  </main>
+  <script type="module" src="../assets/js/settings.js"></script>
+</body>
+</html>
